@@ -1,0 +1,8 @@
+app/config/config.local.neon
+vendor
+temp/*
+log/*
+tests/**/*.actual
+tests/**/*.expected
+tests/tmp/*
+!.gitkeep
