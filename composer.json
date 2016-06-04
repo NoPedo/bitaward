@@ -23,7 +23,8 @@
 		"zenify/doctrine-migrations": "^2.3",
 		"kdyby/autowired": "@dev",
 		"coinbase/coinbase": "^2.4",
-		"majkl578/nette-identity-doctrine": "@dev"
+		"majkl578/nette-identity-doctrine": "@dev",
+		"nextras/secured-links": "^1.3"
 	},
 	"require-dev": {
 		"nette/tester": "^1.6"

@@ -62,4 +62,20 @@ class User extends Object implements IIdentity
 	{
 		// TODO: Implement getRoles() method.
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
 }

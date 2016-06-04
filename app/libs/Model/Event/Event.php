@@ -21,6 +21,12 @@ class Event extends Object
 	protected $name;
 
 	/**
+	 * @var string
+	 * @ORM\Column(type="string", length=10)
+	 */
+	protected $hashtag;
+
+	/**
 	 * @var \DateTime
 	 * @ORM\Column(type="date", nullable=true)
 	 */
@@ -37,6 +43,62 @@ class Event extends Object
 	{
 		$this->speakers = new ArrayCollection();
 		$this->name = $name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getDate()
+	{
+		return $this->date;
+	}
+
+	/**
+	 * @return Speaker[]|\Doctrine\Common\Collections\Collection
+	 */
+	public function getSpeakers()
+	{
+		return $this->speakers;
+	}
+
+	/**
+	 * @param string $name
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+	}
+
+	/**
+	 * @param \DateTime $date
+	 */
+	public function setDate($date)
+	{
+		$this->date = $date;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getHashtag()
+	{
+		return $this->hashtag;
+	}
+
+	/**
+	 * @param string $hashtag
+	 */
+	public function setHashtag($hashtag)
+	{
+		$this->hashtag = $hashtag;
 	}
 
 }
