@@ -36,10 +36,12 @@ class AwardForm extends BaseControl
 	protected function createComponentForm()
 	{
 		$form = $this->formFactory->create();
-		$form->addText('organizerAmount', 'Organizer award');
+		$form->addText('organizerAmount', 'Organizer award')
+			->setDefaultValue(0);
 		$speakers = $form->addContainer('speakers');
 		foreach ($this->event->getSpeakers() as $speaker) {
-			$speakers->addText($speaker->getId(), $speaker->getName());
+			$speakers->addText($speaker->getId(), $speaker->getName())
+				->setDefaultValue(0);
 		}
 		$form->addSubmit('pay', 'Pay');
 		$form->onSuccess[] = function (Form $form, $values) {
@@ -54,7 +56,8 @@ class AwardForm extends BaseControl
 
 	public function render()
 	{
-		$this['form']->render();
+		$this->template->event = $this->event;
+		$this->template->render(__DIR__ . '/awardForm.latte');
 	}
 
 }

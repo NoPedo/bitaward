@@ -45,14 +45,14 @@ class AwardCheckout extends Object
 	{
 		$checkout = new Checkout();
 		if ($organizerAmount > 0) {
-			$award = Award::forOrganizer($checkout, $event, $organizerAmount);
+			$award = Award::forOrganizer($checkout, $event, $organizerAmount / 1000);
 			$this->entityManager->persist($award);
-			$checkout->addAmount($organizerAmount);
+			$checkout->addAmount($award->getAmount());
 		}
 		/** @var Speaker $speaker */
 		foreach ($event->getSpeakers() as $speaker) {
 			if (isset($speakersAmount[$speaker->getId()]) && $speakersAmount[$speaker->getId()] > 0) {
-				$award = Award::forSpeaker($checkout, $speaker, $speakersAmount[$speaker->getId()]);
+				$award = Award::forSpeaker($checkout, $speaker, $speakersAmount[$speaker->getId()] / 1000);
 				$this->entityManager->persist($award);
 				$checkout->addAmount($award->getAmount());
 			}

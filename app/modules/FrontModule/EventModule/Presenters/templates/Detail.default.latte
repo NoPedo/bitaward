@@ -5,5 +5,11 @@
             Add speaker
         </a>
     </div>
-{control awardForm}
+	<div class="container event-detail">
+		<div class="jumbotron event-info">
+			<h1>{$event->name}</h1>
+			<h2>{$event->date|date:"Y-m-d"}</h2>
+		</div>
+		{control awardForm}
+	</div>
 </div>

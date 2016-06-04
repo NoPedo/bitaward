@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width">
 
     <link type="text/css" rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/assets/css/style.css"/>
     <title>{ifset title}{include title|striptags} | {/ifset}Nette Web</title>
 
     <style>
@@ -45,6 +46,8 @@
 {include content}
 
 {block scripts}
+    <script src="/vendor/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="/assets/js/main.js" type="text/javascript"></script>
 {/block}
 </body>
 </html>

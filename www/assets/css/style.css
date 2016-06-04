@@ -1,0 +1,36 @@
+.event-detail .event-info {
+	text-align: center;
+}
+
+.award .organizer {
+	text-align: center;
+	background: #fff4be;
+}
+
+.award .amount input {
+	padding: 10px;
+	text-align: center;
+	font-size: 20px;
+	height: 60px;
+	border-radius: 10px;
+}
+
+.award .speakers h2 {
+	text-align: center;
+}
+
+.award .speakers .speaker {
+	padding: 20px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+
+.award .pay {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.award .pay input {
+	padding: 20px 50px;
+	font-size: 30px;
+}
