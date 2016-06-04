@@ -7,6 +7,7 @@ use App\Model\Event\Event;
 use App\Model\Event\EventRepository;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Form;
+use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\Security\AuthenticationException;
 
 /**
@@ -25,19 +26,23 @@ class FindEventForm extends BaseControl
 
 	/** @var EventRepository */
 	private $eventRepository;
+	/** @var ILatteFactory */
+	private $latteFactory;
 
 
 	/**
 	 * LoginForm constructor.
 	 * @param FormFactory $formFactory
 	 * @param EventRepository $eventRepository
+	 * @param ILatteFactory $latteFactory
 	 * @internal param EventRepository $eventRepository
 	 */
-	public function __construct(FormFactory $formFactory, EventRepository $eventRepository)
+	public function __construct(FormFactory $formFactory, EventRepository $eventRepository, ILatteFactory $latteFactory)
 	{
 		parent::__construct();
 		$this->formFactory = $formFactory;
 		$this->eventRepository = $eventRepository;
+		$this->latteFactory = $latteFactory;
 	}
 
 	/**
@@ -51,7 +56,7 @@ class FindEventForm extends BaseControl
 		$form->addText('hashtag', '#')
 			->setRequired('Please enter event hashtag');
 
-		$form->addSubmit('go', 'Go');
+		$form->addSubmit('go', 'Go to event');
 		$form->onSuccess[] = function (Form $form, $values) {
 			$event = $this->eventRepository->findByHashtag($values->hashtag);
 			$this->onSuccess($event);
