@@ -46,3 +46,6 @@ kdyby.doctrine:
 		App: %appDir%
 zenify.migrations:
 	directory: %appDir%/migrations
+
+includes:
+	- coinbase.neon
