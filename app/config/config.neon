@@ -1,6 +1,10 @@
-# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
-# https://nette.org/security-warning
-
+extensions:
+	kdyby.doctrine: Kdyby\Doctrine\DI\OrmExtension
+	kdyby.annotations: Kdyby\Annotations\DI\AnnotationsExtension
+	kdyby.events: Kdyby\Events\DI\EventsExtension
+	kdyby.console: Kdyby\Console\DI\ConsoleExtension
+	zenify.migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
+	zenify.events: Symnedi\EventDispatcher\DI\EventDispatcherExtension
 parameters:
 
 
@@ -20,3 +24,10 @@ session:
 
 services:
 	router: App\RouterFactory::createRouter
+
+
+kdyby.doctrine:
+	metadata:
+		App: %appDir%
+zenify.migrations:
+	directory: %appDir%/migrations
