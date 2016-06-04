@@ -28,6 +28,12 @@ class DetailPresenter extends BasePresenter
 	}
 
 
+	public function renderDefault()
+	{
+		$this->template->event = $this->event;
+	}
+
+
 	protected function createComponentAwardForm(AwardFormFactory $factory)
 	{
 		$control = $factory->create($this->event);
