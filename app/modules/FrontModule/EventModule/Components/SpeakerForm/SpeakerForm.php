@@ -1,9 +1,10 @@
 <?php
-namespace App\FrontModule\EventModule\Components\EventForm;
+namespace App\FrontModule\EventModule\Components\SpeakerForm;
 
 use App\Components\BaseControl;
 use App\Core\Form\FormFactory;
 use App\Model\Event\Event;
+use App\Model\Event\Speaker;
 use App\Model\Payment\Wallet;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Form;
@@ -11,9 +12,9 @@ use Nette\Application\UI\Form;
 /**
  * @author Jiri Travnicek
  *
- * @method onSuccess()
+ * @method onSuccess(Speaker $speaker)
  */
-class EventForm extends BaseControl
+class SpeakerForm extends BaseControl
 {
 
 	/** @var callable[] */
@@ -22,10 +23,11 @@ class EventForm extends BaseControl
 	/** @var FormFactory */
 	private $formFactory;
 
-	/**
-	 * @var EntityManager
-	 */
+	/** @var EntityManager */
 	private $entityManager;
+
+	/** @var Event */
+	private $event;
 
 
 	/**
@@ -41,6 +43,11 @@ class EventForm extends BaseControl
 		$this->entityManager = $eventManager;
 	}
 
+	public function setEvent(Event $event)
+	{
+		$this->event = $event;
+	}
+
 	/**
 	 * @return Form
 	 * @throws \Nette\Security\AuthenticationException
@@ -49,34 +56,33 @@ class EventForm extends BaseControl
 	{
 		$form = $this->formFactory->create();
 		$form->addText('name', 'Name')
-			->setRequired('Please enter event name');
+			->setRequired('Please enter speaker name');
 
-		$form->addText('hashtag', 'hashtag')
-			->setRequired('Please enter event hashtag');
+		$form->addText('topic', 'Topic')
+			->setRequired('Please enter topic');
 
-		$form->addText('date', 'Date')
-			->setRequired('Please set event date');
-
-		$form->addText('wallet_address', 'BTC wallet address')
-			->setRequired('Please enter your BTC wallet address');
+		$form->addText('wallet_address', 'BTC wallet address');
 
 		$form->addSubmit('ok', 'Save');
 		$form->onSuccess[] = function (Form $form, $values) {
 			try {
-				$event = new Event($values->name);
-				$event->setDate(new \DateTime($values->date));
-				$event->setHashtag($values->hashtag);
+				$speaker = new Speaker;
+				$speaker->name = $values->name;
+				$speaker->talkTitle = $values->topic;
+				$speaker->event = $this->event;
 
-				$wallet = new Wallet($values->wallet_address);
-				$event->setWallet($wallet);
+				if ($values->wallet_address !== '') {
+					$wallet = new Wallet($values->wallet_address);
+					$this->entityManager->persist($wallet);
+					$speaker->setWallet($wallet);
+				}
 
-				$this->entityManager->persist($wallet);
-				$this->entityManager->persist($event);
+				$this->entityManager->persist($speaker);
 				$this->entityManager->flush();
 			} catch (\Exception $e) {
 				$form->addError($e->getMessage());
 			}
-			$this->onSuccess();
+			$this->onSuccess($speaker);
 		};
 
 		return $form;

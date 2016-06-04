@@ -74,5 +74,37 @@ class Speaker extends Object
 		return $this->event;
 	}
 
+	/**
+	 * @param Event $event
+	 */
+	public function setEvent($event)
+	{
+		$this->event = $event;
+	}
+
+	/**
+	 * @param string $name
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+	}
+
+	/**
+	 * @param string $talkTitle
+	 */
+	public function setTalkTitle($talkTitle)
+	{
+		$this->talkTitle = $talkTitle;
+	}
+
+	/**
+	 * @param Wallet $wallet
+	 */
+	public function setWallet($wallet)
+	{
+		$this->wallet = $wallet;
+	}
+
 
 }
