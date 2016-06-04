@@ -25,6 +25,13 @@ session:
 services:
 	router: App\RouterFactory::createRouter
 
+	-
+		implement: App\Core\Form\FormFactory
+		setup:
+			- setRenderer
+	- App\Core\Forms\Bootstrap3Renderer
+
+	- App\FrontModule\UserModule\Components\RegisterForm\RegisterFormFactory
 
 kdyby.doctrine:
 	metadata:
