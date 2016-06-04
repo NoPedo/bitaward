@@ -1,8 +1,10 @@
 app/config/config.local.neon
-vendor
+/vendor
 temp/*
 log/*
 tests/**/*.actual
 tests/**/*.expected
 tests/tmp/*
 !.gitkeep
+node_modules
+
