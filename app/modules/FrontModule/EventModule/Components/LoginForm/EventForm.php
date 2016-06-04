@@ -62,8 +62,6 @@ class EventForm extends BaseControl
 			->setRequired('Please set event date');
 		$form->addText('wallet_address', 'BTC wallet address')
 			->setRequired('Please enter your BTC wallet address');
-		$form->addText('wallet_address', 'BTC wallet address')
-			->setRequired('Please enter your BTC wallet address');
 
 		$form->addSubmit('ok', 'Save')
 			->getControlPrototype()->class('btn btn-primary btn-lg');
