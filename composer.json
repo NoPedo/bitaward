@@ -21,6 +21,7 @@
 		"tracy/tracy": "^2.3",
 		"kdyby/doctrine": "^3.1",
 		"zenify/doctrine-migrations": "^2.3",
+		"kdyby/autowired": "@dev",
 		"coinbase/coinbase": "^2.4"
 	},
 	"require-dev": {
