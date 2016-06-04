@@ -7,12 +7,14 @@
         <thead>
         <th>Name</th>
         <th>Hashtag</th>
+        <th>Wallet Address</th>
         <th>Date</th>
         <th n:if="$user->isLoggedIn()">Options</th>
         </thead>
         <tr n:foreach="$events as $event">
-            <td>{$event->name}</td>
+            <td><a n:href=":Front:Event:Detail: $event->id">{$event->name}</a></td>
             <td>#{$event->hashtag}</td>
+            <td>{$event->wallet->address}</td>
             <td>{$event->date|date:"d.m.Y"}</td>
             <td n:if="$user->isLoggedIn()"><a n:href="remove! $event->id">Remove event</a></td>
         </tr>

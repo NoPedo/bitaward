@@ -118,4 +118,12 @@ class Event extends Object
 		return $this->wallet;
 	}
 
+	/**
+	 * @param Wallet $wallet
+	 */
+	public function setWallet($wallet)
+	{
+		$this->wallet = $wallet;
+	}
+
 }

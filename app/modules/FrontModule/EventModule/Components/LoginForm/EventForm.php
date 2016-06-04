@@ -4,9 +4,9 @@ namespace App\FrontModule\EventModule\Components\EventForm;
 use App\Components\BaseControl;
 use App\Core\Form\FormFactory;
 use App\Model\Event\Event;
+use App\Model\Payment\Wallet;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Form;
-use Nette\Security\AuthenticationException;
 
 /**
  * @author Jiri Travnicek
@@ -57,6 +57,9 @@ class EventForm extends BaseControl
 		$form->addText('date', 'Date')
 			->setRequired('Please set event date');
 
+		$form->addText('wallet_address', 'BTC wallet address')
+			->setRequired('Please enter your BTC wallet address');
+
 		$form->addSubmit('ok', 'Save');
 		$form->onSuccess[] = function (Form $form, $values) {
 			try {
@@ -64,6 +67,10 @@ class EventForm extends BaseControl
 				$event->setDate(new \DateTime($values->date));
 				$event->setHashtag($values->hashtag);
 
+				$wallet = new Wallet($values->wallet_address);
+				$event->setWallet($wallet);
+
+				$this->entityManager->persist($wallet);
 				$this->entityManager->persist($event);
 				$this->entityManager->flush();
 
