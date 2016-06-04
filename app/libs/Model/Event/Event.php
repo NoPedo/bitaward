@@ -23,7 +23,7 @@ class Event extends Object
 
 	/**
 	 * @var string
-	 * @ORM\Column(type="string", length=10)
+	 * @ORM\Column(type="string", length=15)
 	 */
 	protected $hashtag;
 
