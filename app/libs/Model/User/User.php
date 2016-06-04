@@ -4,13 +4,14 @@ namespace App\Model\User;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Nette\Object;
+use Nette\Security\IIdentity;
 use Nette\Security\Passwords;
 
 
 /**
  * @ORM\Entity
  */
-class User extends Object
+class User extends Object implements IIdentity
 {
 	use Identifier;
 
@@ -53,4 +54,12 @@ class User extends Object
 		return Passwords::verify($password, $this->password);
 	}
 
+	/**
+	 * Returns a list of roles that the user is a member of.
+	 * @return array
+	 */
+	public function getRoles()
+	{
+		// TODO: Implement getRoles() method.
+	}
 }

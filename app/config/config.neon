@@ -5,6 +5,8 @@ extensions:
 	kdyby.console: Kdyby\Console\DI\ConsoleExtension
 	zenify.migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
 	zenify.events: Symnedi\EventDispatcher\DI\EventDispatcherExtension
+	doctrine.identity: Majkl578\NetteAddons\Doctrine2Identity\DI\IdentityExtension
+
 parameters:
 
 
@@ -32,6 +34,9 @@ services:
 	- App\Core\Forms\Bootstrap3Renderer
 
 	- App\FrontModule\UserModule\Components\RegisterForm\RegisterFormFactory
+	- App\FrontModule\UserModule\Components\LoginForm\LoginFormFactory
+	- App\Model\User\UserRepository
+	- App\Model\User\Authenticator
 
 kdyby.doctrine:
 	metadata:
