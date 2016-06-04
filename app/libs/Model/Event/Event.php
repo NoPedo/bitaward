@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Event;
 
+use App\Model\Payment\Wallet;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
@@ -37,6 +38,13 @@ class Event extends Object
 	 * @ORM\OneToMany(targetEntity=Speaker::class, mappedBy="event")
 	 */
 	protected $speakers;
+
+	/**
+	 * @var Wallet
+	 * @ORM\ManyToOne(targetEntity=Wallet::class)
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	protected $wallet;
 
 
 	public function __construct($name)
@@ -99,6 +107,15 @@ class Event extends Object
 	public function setHashtag($hashtag)
 	{
 		$this->hashtag = $hashtag;
+	}
+
+
+	/**
+	 * @return Wallet
+	 */
+	public function getWallet()
+	{
+		return $this->wallet;
 	}
 
 }

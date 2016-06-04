@@ -1,49 +1,41 @@
 <?php
 namespace App\FrontModule\EventModule\Presenters;
 
+use App\FrontModule\EventModule\Components\AwardForm\AwardFormFactory;
 use App\FrontModule\Presenters\BasePresenter;
 use App\Model\Event\Event;
-use App\Model\Event\EventRepository;
-use Kdyby\Doctrine\EntityManager;
+use App\Model\Payment\Checkout;
+use Doctrine\ORM\EntityManager;
 
-/**
- * @author Jiri Travnicek
- * @package App\FrontModule\EventModule\Presenters
- */
 class DetailPresenter extends BasePresenter
 {
-	/**
-	 * @var EventRepository
-	 */
-	private $eventRepository;
-
-	/**w
-	 * @var Event
-	 */
-	private $event;
-	/**
-	 * @var EntityManager
-	 */
+	/** @var EntityManager */
 	private $entityManager;
 
-	/**
-	 * EventListPresenter constructor.
-	 * @param EventRepository $eventRepository
-	 * @param EntityManager $eventManager
-	 */
-	public function __construct(EventRepository $eventRepository, EntityManager $eventManager)
+	/** @var Event */
+	private $event;
+
+
+	public function __construct(EntityManager $entityManager)
 	{
-		$this->eventRepository = $eventRepository;
-		$this->entityManager = $eventManager;
+		$this->entityManager = $entityManager;
 	}
+
 
 	public function actionDefault($id)
 	{
-		$this->event = $this->eventRepository->findById($id);
+		$this->event = $this->entityManager->find(Event::class, $id);
 	}
 
-	public function renderDefault()
+
+	protected function createComponentAwardForm(AwardFormFactory $factory)
 	{
-		$this->template->event = $this->event;
+		$control = $factory->create($this->event);
+		$control->onCheckout[] = function ($control, Checkout $checkout) {
+			$this->redirectUrl('https://sandbox.coinbase.com/checkouts/' . $checkout->getEmbedCode());
+		};
+
+		return $control;
 	}
+
 }

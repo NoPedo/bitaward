@@ -1,10 +1,2 @@
 {block content}
-<div class="container">
-    <h1>{$event->name}</h1>
-
-    <ul>
-        <li n:foreach="$event->speakers as $speaker">
-            {$speaker->name} - {$speaker->talkTitle}
-        </li>
-    </ul>
-</div>
+{control awardForm}

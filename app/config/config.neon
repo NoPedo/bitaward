@@ -41,8 +41,11 @@ services:
 	- App\Model\User\Authenticator
 	- App\Model\Event\EventRepository
 
+	- App\FrontModule\EventModule\Components\AwardForm\AwardFormFactory
+
 	- App\Model\Payment\MoneyTransferer
 	- App\Model\Payment\PayoutSender
+	- App\Model\Payment\AwardCheckout
 kdyby.console:
 	commands:
 		- App\Cli\PayoutCommand

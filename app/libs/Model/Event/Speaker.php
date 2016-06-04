@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Event;
 
+use App\Model\Payment\Wallet;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Nette\Object;
@@ -31,12 +32,12 @@ class Speaker extends Object
 	protected $talkTitle;
 
 	/**
-	 * @return Event
+	 * @var Wallet
+	 * @ORM\ManyToOne(targetEntity=Wallet::class)
+	 * @ORM\JoinColumn(nullable=true)
 	 */
-	public function getEvent()
-	{
-		return $this->event;
-	}
+	protected $wallet;
+
 
 	/**
 	 * @return string
@@ -46,6 +47,7 @@ class Speaker extends Object
 		return $this->name;
 	}
 
+
 	/**
 	 * @return string
 	 */
@@ -53,4 +55,24 @@ class Speaker extends Object
 	{
 		return $this->talkTitle;
 	}
+
+
+	/**
+	 * @return Wallet
+	 */
+	public function resolveWallet()
+	{
+		return $this->wallet ?: $this->event->getWallet();
+	}
+
+
+	/**
+	 * @return Event
+	 */
+	public function getEvent()
+	{
+		return $this->event;
+	}
+
+
 }
