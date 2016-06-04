@@ -41,6 +41,12 @@ services:
 	- App\Model\User\Authenticator
 	- App\Model\Event\EventRepository
 
+	- App\Model\Payment\MoneyTransferer
+	- App\Model\Payment\PayoutSender
+kdyby.console:
+	commands:
+		- App\Cli\PayoutCommand
+
 kdyby.doctrine:
 	metadata:
 		App: %appDir%

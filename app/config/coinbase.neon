@@ -1,5 +1,11 @@
 parameters:
-    apiKey: ''
-    apiSecret: ''
+	apiKey: ''
+	apiSecret: ''
+	accountId: ''
 services:
-    - Coinbase\Wallet\Configuration::apiKey(%apiKey%, %apiSecret%)
+	-
+		factory: Coinbase\Wallet\Configuration::apiKey(%apiKey%, %apiSecret%)
+		setup:
+			- setApiUrl(Coinbase\Wallet\Configuration::SANDBOX_API_URL)
+	- Coinbase\Wallet\Client::create
+	- App\Model\Payment\AccountProvider(%accountId%)
