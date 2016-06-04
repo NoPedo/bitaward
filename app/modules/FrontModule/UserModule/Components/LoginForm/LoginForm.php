@@ -11,13 +11,13 @@ use Nette\Security\User;
 /**
  * @author Jiri Travnicek
  *
- * @method onSave()
+ * @method onLogin()
  */
 class LoginForm extends BaseControl
 {
 
 	/** @var callable[] */
-	public $onSave = [];
+	public $onLogin = [];
 
 	/** @var FormFactory */
 	private $formFactory;
@@ -61,7 +61,7 @@ class LoginForm extends BaseControl
 		$form->onSuccess[] = function (Form $form, $values) {
 			try {
 				$this->user->login($values->email, $values->password);
-				$this->onSave();
+				$this->onLogin();
 			} catch (AuthenticationException $e) {
 				$form->addError($e->getMessage());
 			}

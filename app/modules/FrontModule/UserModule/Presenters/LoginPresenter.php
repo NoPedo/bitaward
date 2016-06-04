@@ -25,7 +25,7 @@ class LoginPresenter extends BasePresenter
 	protected function createComponentLoginForm(LoginFormFactory $factory)
 	{
 		$control = $factory->create();
-		$control->onSave[] = function () {
+		$control->onLogin[] = function () {
 			$this->flashMessage('You have been logged');
 			$this->redirect(':Front:Dashboard:');
 		};

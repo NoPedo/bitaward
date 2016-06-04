@@ -2,7 +2,6 @@
 
 namespace App\Model\User;
 
-use Majkl578\NetteAddons\Doctrine2Identity\Security\FakeIdentity;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
 use Nette\Security\IIdentity;
