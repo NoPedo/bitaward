@@ -31,14 +31,14 @@ class EventForm extends BaseControl
 	/**
 	 * LoginForm constructor.
 	 * @param FormFactory $formFactory
-	 * @param EntityManager $entityManager
+	 * @param EntityManager $eventManager
 	 * @internal param EventRepository $eventRepository
 	 */
-	public function __construct(FormFactory $formFactory, EntityManager $entityManager)
+	public function __construct(FormFactory $formFactory, EntityManager $eventManager)
 	{
 		parent::__construct();
 		$this->formFactory = $formFactory;
-		$this->entityManager = $entityManager;
+		$this->entityManager = $eventManager;
 	}
 
 	/**

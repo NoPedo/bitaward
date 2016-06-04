@@ -36,6 +36,7 @@ services:
 	- App\FrontModule\UserModule\Components\RegisterForm\RegisterFormFactory
 	- App\FrontModule\UserModule\Components\LoginForm\LoginFormFactory
 	- App\FrontModule\EventModule\Components\EventForm\EventFormFactory
+	- App\FrontModule\Components\FindEventForm\FindEventFormFactory
 	- App\Model\User\UserRepository
 	- App\Model\User\Authenticator
 	- App\Model\Event\EventRepository

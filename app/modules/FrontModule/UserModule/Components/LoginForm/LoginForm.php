@@ -32,15 +32,15 @@ class LoginForm extends BaseControl
 	/**
 	 * LoginForm constructor.
 	 * @param FormFactory $formFactory
-	 * @param EntityManager $entityManager
+	 * @param EntityManager $eventManager
 	 * @param User $user
 	 * @internal param UserRepository $userRepository
 	 */
-	public function __construct(FormFactory $formFactory, EntityManager $entityManager, User $user)
+	public function __construct(FormFactory $formFactory, EntityManager $eventManager, User $user)
 	{
 		parent::__construct();
 		$this->formFactory = $formFactory;
-		$this->entityManager = $entityManager;
+		$this->entityManager = $eventManager;
 		$this->user = $user;
 	}
 

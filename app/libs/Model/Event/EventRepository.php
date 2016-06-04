@@ -45,6 +45,12 @@ class EventRepository
 		return $repository->findOneBy(['id' => $id]);
 	}
 
+	public function findByHashtag($hashtag)
+	{
+		$repository = $this->getRepository();
+		return $repository->findOneBy(['hashtag' => $hashtag]);
+	}
+
 	/**
 	 * @return EntityRepository
 	 */

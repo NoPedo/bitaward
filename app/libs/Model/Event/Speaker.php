@@ -30,4 +30,27 @@ class Speaker extends Object
 	 */
 	protected $talkTitle;
 
+	/**
+	 * @return Event
+	 */
+	public function getEvent()
+	{
+		return $this->event;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTalkTitle()
+	{
+		return $this->talkTitle;
+	}
 }

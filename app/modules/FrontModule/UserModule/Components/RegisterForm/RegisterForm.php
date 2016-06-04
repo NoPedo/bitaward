@@ -25,10 +25,10 @@ class RegisterForm extends BaseControl
 	private $entityManager;
 
 
-	public function __construct(FormFactory $formFactory, EntityManager $entityManager)
+	public function __construct(FormFactory $formFactory, EntityManager $eventManager)
 	{
 		$this->formFactory = $formFactory;
-		$this->entityManager = $entityManager;
+		$this->entityManager = $eventManager;
 	}
 
 

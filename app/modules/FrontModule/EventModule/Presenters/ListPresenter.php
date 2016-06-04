@@ -30,12 +30,12 @@ class ListPresenter extends BasePresenter
 	/**
 	 * EventListPresenter constructor.
 	 * @param EventRepository $eventRepository
-	 * @param EntityManager $entityManager
+	 * @param EntityManager $eventManager
 	 */
-	public function __construct(EventRepository $eventRepository, EntityManager $entityManager)
+	public function __construct(EventRepository $eventRepository, EntityManager $eventManager)
 	{
 		$this->eventRepository = $eventRepository;
-		$this->entityManager = $entityManager;
+		$this->entityManager = $eventManager;
 	}
 
 	/**
@@ -55,7 +55,7 @@ class ListPresenter extends BasePresenter
 			$this->entityManager->flush();
 			$this->flashMessage('Event ' . $event->name . ' remove successfully', 'success');
 		} catch (\Exception $e) {
-			$this->flashMessage('Failed to remove event: ' . $e->getMessage(), 'error');
+			$this->flashMessage('Failed to remove event: ' . $e->getMessage(), 'danger');
 		}
 		$this->redirect('default');
 	}
