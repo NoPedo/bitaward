@@ -2,6 +2,7 @@
 namespace App\Model\Event;
 
 use App\Model\Payment\Wallet;
+use App\Model\User\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
@@ -20,6 +21,12 @@ class Event extends Object
 	 * @ORM\Column(type="string")
 	 */
 	protected $name;
+
+	/**
+	 * @var User
+	 * @ORM\ManyToOne(targetEntity=User::class)
+	 */
+	protected $owner;
 
 	/**
 	 * @var string
@@ -47,11 +54,13 @@ class Event extends Object
 	protected $wallet;
 
 
-	public function __construct($name)
+	public function __construct($name, User $owner)
 	{
 		$this->speakers = new ArrayCollection();
 		$this->name = $name;
+		$this->owner = $owner;
 	}
+
 
 	/**
 	 * @return string
@@ -61,6 +70,7 @@ class Event extends Object
 		return $this->name;
 	}
 
+
 	/**
 	 * @return \DateTime
 	 */
@@ -68,6 +78,7 @@ class Event extends Object
 	{
 		return $this->date;
 	}
+
 
 	/**
 	 * @return Speaker[]|\Doctrine\Common\Collections\Collection
@@ -77,6 +88,7 @@ class Event extends Object
 		return $this->speakers;
 	}
 
+
 	/**
 	 * @param string $name
 	 */
@@ -84,6 +96,7 @@ class Event extends Object
 	{
 		$this->name = $name;
 	}
+
 
 	/**
 	 * @param \DateTime $date
@@ -93,6 +106,7 @@ class Event extends Object
 		$this->date = $date;
 	}
 
+
 	/**
 	 * @return string
 	 */
@@ -100,6 +114,7 @@ class Event extends Object
 	{
 		return $this->hashtag;
 	}
+
 
 	/**
 	 * @param string $hashtag

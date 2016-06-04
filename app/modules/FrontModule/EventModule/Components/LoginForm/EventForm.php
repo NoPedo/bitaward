@@ -7,6 +7,7 @@ use App\Model\Event\Event;
 use App\Model\Payment\Wallet;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Form;
+use Nette\Security\User;
 
 /**
  * @author Jiri Travnicek
@@ -22,24 +23,26 @@ class EventForm extends BaseControl
 	/** @var FormFactory */
 	private $formFactory;
 
-	/**
-	 * @var EntityManager
-	 */
+	/** @var EntityManager */
 	private $entityManager;
 
+	/** @var User */
+	private $user;
+
 
 	/**
-	 * LoginForm constructor.
-	 * @param FormFactory $formFactory
-	 * @param EntityManager $eventManager
-	 * @internal param EventRepository $eventRepository
+	 * @param FormFactory
+	 * @param EntityManager
+	 * @param User
 	 */
-	public function __construct(FormFactory $formFactory, EntityManager $eventManager)
+	public function __construct(FormFactory $formFactory, EntityManager $eventManager, User $user)
 	{
 		parent::__construct();
 		$this->formFactory = $formFactory;
 		$this->entityManager = $eventManager;
+		$this->user = $user;
 	}
+
 
 	/**
 	 * @return Form
@@ -48,22 +51,25 @@ class EventForm extends BaseControl
 	protected function createComponentForm()
 	{
 		$form = $this->formFactory->create();
+		$form->getElementPrototype()->class('form-vertical');
 		$form->addText('name', 'Name')
 			->setRequired('Please enter event name');
 
-		$form->addText('hashtag', 'hashtag')
+		$form->addText('hashtag', '#hashtag')
 			->setRequired('Please enter event hashtag');
 
 		$form->addText('date', 'Date')
 			->setRequired('Please set event date');
-
+		$form->addText('wallet_address', 'BTC wallet address')
+			->setRequired('Please enter your BTC wallet address');
 		$form->addText('wallet_address', 'BTC wallet address')
 			->setRequired('Please enter your BTC wallet address');
 
-		$form->addSubmit('ok', 'Save');
+		$form->addSubmit('ok', 'Save')
+			->getControlPrototype()->class('btn btn-primary btn-lg');
 		$form->onSuccess[] = function (Form $form, $values) {
 			try {
-				$event = new Event($values->name);
+				$event = new Event($values->name, $this->user->getIdentity());
 				$event->setDate(new \DateTime($values->date));
 				$event->setHashtag($values->hashtag);
 
