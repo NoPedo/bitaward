@@ -1,0 +1,5 @@
+parameters:
+    apiKey: ''
+    apiSecret: ''
+services:
+    - Coinbase\Wallet\Configuration::apiKey(%apiKey%, %apiSecret%)
