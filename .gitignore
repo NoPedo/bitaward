@@ -7,4 +7,3 @@ tests/**/*.expected
 tests/tmp/*
 !.gitkeep
 node_modules
-
